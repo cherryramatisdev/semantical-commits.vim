@@ -1,0 +1,12 @@
+* Welcome to semantical commits	
+  This is my very first plugin for vim and I'm porting all my utils git
+  functions to a proper plugin so we can develop it together :)
+
+* TODOS
+  1. Refactor push and pull functions to not depend to a git alias
+  Today I run **Git ps** and **Git pl** that is aliases defined on my
+  =.gitconfig=
+  #+BEGIN_SRC sh
+    ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
+    pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
+  #+END_SRC
