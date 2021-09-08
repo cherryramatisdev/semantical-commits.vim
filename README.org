@@ -11,3 +11,4 @@
     pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
   #+END_SRC
   2. Add =Push= and =Pull= commands with completion list for possible branches
+  3. On method =SwitchBranch= add completion for available branches
