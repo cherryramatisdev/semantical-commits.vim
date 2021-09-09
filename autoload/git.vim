@@ -56,9 +56,9 @@ function! git#Commit() abort
         \ '"'
 
   if l:should_verify_commit == 1
-    let l:runner = l:runner . ' --no-verify'
-  else
     let l:runner = l:runner
+  else
+    let l:runner = l:runner . ' --no-verify'
   endif
 
   call s:runGitCommand(l:runner)
