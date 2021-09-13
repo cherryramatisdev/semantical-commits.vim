@@ -7,10 +7,28 @@ function! s:getCurrentBranch() abort
 endfunction
 
 function git#Push()
-  call s:runGitCommand('git push origin ' . s:getCurrentBranch())
+  let l:branch_name = input('Choose branch: ', '', 'customlist,git#GetBranches')
+  if len(l:branch_name) == 0
+    return
+  endif
+
+  call s:runGitCommand('git push origin ' . l:branch_name)
 endfunction
 
 function git#Pull()
+  let l:branch_name = input('Choose branch: ', '', 'customlist,git#GetBranches')
+  if len(l:branch_name) == 0
+    return
+  endif
+
+  call s:runGitCommand('git pull origin ' . l:branch_name)
+endfunction
+
+function git#PushCurrent()
+  call s:runGitCommand('git push origin ' . s:getCurrentBranch())
+endfunction
+
+function git#PullCurrent()
   call s:runGitCommand('git pull origin ' . s:getCurrentBranch())
 endfunction
 
