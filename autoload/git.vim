@@ -1,5 +1,5 @@
 function s:runGitCommand(command)
-  execute a:command
+  execute system(a:command)
 endfunction
 
 function! s:getCurrentBranch() abort
@@ -7,11 +7,11 @@ function! s:getCurrentBranch() abort
 endfunction
 
 function git#Push()
-  call s:runGitCommand('Git push origin ' . s:getCurrentBranch())
+  call s:runGitCommand('git push origin ' . s:getCurrentBranch())
 endfunction
 
 function git#Pull()
-  call s:runGitCommand('Git pull origin ' . s:getCurrentBranch())
+  call s:runGitCommand('git pull origin ' . s:getCurrentBranch())
 endfunction
 
 function! git#GetBranches(...) abort
@@ -24,7 +24,7 @@ function! git#SwitchBranch() abort
     return
   endif
 
-  call s:runGitCommand('Git checkout ' . l:branch_name)
+  call s:runGitCommand('git checkout ' . l:branch_name)
 endfunction
 
 function! git#CreateBranch() abort
@@ -34,7 +34,7 @@ function! git#CreateBranch() abort
     return
   endif
 
-  call s:runGitCommand('Git checkout -b ' . l:branch_name)
+  call s:runGitCommand('git checkout -b ' . l:branch_name)
 endfunction
 
 function! git#GetCommitTypes(...) abort
@@ -61,7 +61,7 @@ function! git#Commit() abort
   let l:should_verify_commit = confirm('Should verify? ', "&Yes\n&No", 1)
   redraw
 
-  let l:runner = 'Git commit -m "' .
+  let l:runner = 'git commit -m "' .
         \ l:commit_type .
         \ ': ' .
         \ l:commit_message .
