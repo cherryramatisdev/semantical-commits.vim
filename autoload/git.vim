@@ -42,8 +42,6 @@ function! git#GetCommitTypes(...) abort
 endfunction
 
 function! git#Commit() abort
-  " let l:options = ['Commit type: ', 'feat', 'fix', 'chore', 'doc', 'refactor']
-
   let l:commit_type = input('Commit type: ', '', 'customlist,git#GetCommitTypes')
   redraw
 
