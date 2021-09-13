@@ -2,12 +2,16 @@ function s:runGitCommand(command)
   execute a:command
 endfunction
 
+function! s:getCurrentBranch() abort
+  return system('git branch --show-current')
+endfunction
+
 function git#Push()
-  call s:runGitCommand('Git ps')
+  call s:runGitCommand('Git push origin ' . s:getCurrentBranch())
 endfunction
 
 function git#Pull()
-  call s:runGitCommand('Git pl')
+  call s:runGitCommand('Git pull origin ' . s:getCurrentBranch())
 endfunction
 
 function! git#GetBranches(...) abort
