@@ -1,14 +1,12 @@
-* Welcome to semantical commits	
+* Welcome to semantical commits
   This is my very first plugin for vim and I'm porting all my utils git
   functions to a proper plugin so we can develop it together :)
 
-* TODOS
-  1. Refactor push and pull functions to not depend to a git alias
-  Today I run **Git ps** and **Git pl** that is aliases defined on my
-  =.gitconfig=
-  #+BEGIN_SRC sh
-    ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
-    pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
-  #+END_SRC
-  2. Add =Push= and =Pull= commands with completion list for possible branches
-  3. On method =SwitchBranch= add completion for available branches
+* Usage
+**PushCurrent**: git push to current branch
+**PullCurrent**: git push to current branch
+**Push**: git push with user input for branch with completion.
+**Pull**: git pull with user input for branch with completion.
+**SwitchBranch**: git checkout with user input for branch with completion.
+**CreateBranch**: git checkout with user input
+**SemanticalCommit**: git commit with user input for commit type and commit message
