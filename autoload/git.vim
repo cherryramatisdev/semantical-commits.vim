@@ -10,8 +10,12 @@ function git#Pull()
   call s:runGitCommand('Git pl')
 endfunction
 
+function! git#GetBranches(...) abort
+  return systemlist("git branch -a | sed 's/* //'")
+endfunction
+
 function! git#SwitchBranch() abort
-  let l:branch_name = input('Branch name: ')
+  let l:branch_name = input('Branch name: ', '', 'customlist,git#GetBranches')
   if l:branch_name == ''
     return
   endif
@@ -29,13 +33,17 @@ function! git#CreateBranch() abort
   call s:runGitCommand('Git checkout -b ' . l:branch_name)
 endfunction
 
-function! git#Commit() abort
-  let l:options = ['Commit type: ', 'feat', 'fix', 'chore', 'doc', 'refactor']
+function! git#GetCommitTypes(...) abort
+  return ['feat', 'fix', 'chore', 'doc', 'refactor']
+endfunction
 
-  let l:commit_type = inputlist(l:options)
+function! git#Commit() abort
+  " let l:options = ['Commit type: ', 'feat', 'fix', 'chore', 'doc', 'refactor']
+
+  let l:commit_type = input('Commit type: ', '', 'customlist,git#GetCommitTypes')
   redraw
 
-  if l:commit_type == 0
+  if len(l:commit_type) == 0
     return
   endif
 
@@ -50,7 +58,7 @@ function! git#Commit() abort
   redraw
 
   let l:runner = 'Git commit -m "' .
-        \ l:options[l:commit_type] .
+        \ l:commit_type .
         \ ': ' .
         \ l:commit_message .
         \ '"'
