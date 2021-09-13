@@ -1,5 +1,5 @@
 function s:runGitCommand(command)
-  execute system(a:command)
+  execute '!' . a:command
 endfunction
 
 function! s:getCurrentBranch() abort
