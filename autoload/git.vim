@@ -1,5 +1,5 @@
 function s:runGitCommand(command)
-  execute 'silent !' . a:command
+  execute '!' . a:command
 endfunction
 
 function! s:getCurrentBranch() abort
@@ -8,6 +8,8 @@ endfunction
 
 function git#Push()
   let l:branch_name = input('Choose branch: ', '', 'customlist,git#GetBranches')
+  redraw
+
   if len(l:branch_name) == 0
     return
   endif
@@ -17,6 +19,8 @@ endfunction
 
 function git#Pull()
   let l:branch_name = input('Choose branch: ', '', 'customlist,git#GetBranches')
+  redraw
+
   if len(l:branch_name) == 0
     return
   endif
@@ -33,7 +37,7 @@ function git#PullCurrent()
 endfunction
 
 function! git#GetBranches(...) abort
-  return systemlist("git branch -a | sed 's/* //'")
+  return systemlist("git branch | sed 's/* //'")
 endfunction
 
 function! git#SwitchBranch() abort
