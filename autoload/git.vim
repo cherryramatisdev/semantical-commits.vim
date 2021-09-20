@@ -36,8 +36,14 @@ function git#PullCurrent()
   call s:runGitCommand('git pull origin ' . s:getCurrentBranch())
 endfunction
 
-function! git#GetBranches(...) abort
-  return systemlist("git branch | sed 's/* //'")
+function! git#GetBranches(A, L, P) abort
+  let l:branches = systemlist("git branch | sed 's/* //'")
+
+  if empty(a:A)
+    return l:branches
+  else
+    return l:branches->matchfuzzy(a:A)
+  endif
 endfunction
 
 function! git#SwitchBranch() abort
@@ -59,8 +65,14 @@ function! git#CreateBranch() abort
   call s:runGitCommand('git checkout -b ' . l:branch_name)
 endfunction
 
-function! git#GetCommitTypes(...) abort
-  return ['feat', 'fix', 'chore', 'doc', 'refactor']
+function! git#GetCommitTypes(A, L, P) abort
+  let l:types = ['feat', 'fix', 'chore', 'doc', 'refactor']
+
+  if empty(a:A)
+    return l:types
+  else
+    return l:types->matchfuzzy(a:A)
+  endif
 endfunction
 
 function! git#Commit() abort
